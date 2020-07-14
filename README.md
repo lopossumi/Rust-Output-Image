@@ -105,6 +105,8 @@ PS D:\RustProjects\output-image> cargo run > image.ppm
 ```
 ![image.png](image.png)
 
+💡 Note: The default types are ```i32``` for integers and ```f64``` for floats.
+
 ## Error output
 To track a long running render, let's add progress reporting. Similar to the ```println!``` macro, Rust provides a ```eprintln!``` mactro which directs the output to the error output stream.
 
@@ -116,8 +118,6 @@ To track a long running render, let's add progress reporting. Similar to the ```
             ...
 ```
 Now we a are done with chapter 2. However, there's still room for improvement before moving on to the next chapter.
-
-💡 Note: The default types are ```i32``` for integers and ```f64``` for floats.
 
 ## PNG output
 
@@ -139,7 +139,8 @@ fn main() {
     const IMAGE_WIDTH: u32 = 256;
     const IMAGE_HEIGHT: u32 = 256;
 
-    // The buffer variable must be marked mutable (mut), as we are going to alter the values in our for loops.
+    // The buffer variable must be marked mutable (mut), as we are going to alter the values 
+    // in our for loops.
     let mut buffer: image::RgbImage = image::ImageBuffer::new(IMAGE_WIDTH, IMAGE_HEIGHT);
 ```
 💡 Note: Older code examples often mention ```extern crate```, but in Rust 2018 it should no longer be required.
