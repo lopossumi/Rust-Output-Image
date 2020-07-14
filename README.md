@@ -10,7 +10,7 @@ In the book everything is written in PPM format to stdout and piped to a text fi
 
 * Write the information to an image buffer instead of stdout
 * Write the buffer to a PNG file
-    * To achieve this, we should import some image library. 
+    * To achieve this, we should import some image library using the package manager. 
 
 
 ## Writing to stdout
@@ -24,7 +24,7 @@ fn main() {
 ```
 Output:
 
-```powershell
+```
 Hello, J. Random User!
 ```
 
@@ -99,8 +99,6 @@ fn main() {
     }
 }
 ```
-💡 Note: The default types are ```i32``` for integers and ```f64``` for floats.
-
 Redirecting the output to a file, we get a PPM image file weighing in at 1.46 MB. The file can viewed e.g. with an [online viewer](http://cs.rhodes.edu/welshc/COMP141_F16/ppmReader.html).
 ```powershell
 PS D:\RustProjects\output-image> cargo run > image.ppm
@@ -118,6 +116,8 @@ To track a long running render, let's add progress reporting. Similar to the ```
             ...
 ```
 Now we a are done with chapter 2. However, there's still room for improvement before moving on to the next chapter.
+
+💡 Note: The default types are ```i32``` for integers and ```f64``` for floats.
 
 ## PNG output
 
@@ -139,11 +139,12 @@ fn main() {
     const IMAGE_WIDTH: u32 = 256;
     const IMAGE_HEIGHT: u32 = 256;
 
+    // The buffer variable must be marked mutable (mut), as we are going to alter the values in our for loops.
     let mut buffer: image::RgbImage = image::ImageBuffer::new(IMAGE_WIDTH, IMAGE_HEIGHT);
 ```
 💡 Note: Older code examples often mention ```extern crate```, but in Rust 2018 it should no longer be required.
 
-The ```buffer``` variable must be marked mutable (```mut```), as we are going to alter the values in our for loops.
+### Prettier imports
 
 Writing the module name all the time (e.g. ```image::RgbImage```) gets old real quick. There is a convenient way to shorten this by modifying the ```use``` expression a bit:
 ```rust
@@ -158,7 +159,9 @@ fn main() {
 ```
 That's better.
 
-Then all we need to do is iterate over all the pixels in the image buffer, set the color value as before, and save to a file:
+### Final program
+
+Now all we need to do is iterate over all the pixels in the image buffer, set the color value as before, and save to a file:
 ```rust
 use image::{RgbImage, ImageBuffer, Rgb};
 
@@ -189,6 +192,8 @@ There's a lot of stuff to process here.
 * Then, we *dereference* the value of ```pixel``` and assign a new ```Rgb struct``` to it.
 * Finally, we ```unwrap()``` the result of the ```save("filename")``` operation. If the save operation would fail, the program would panic in a not-so-pretty way.
 
+#### Error handling
+
 Unwrapping should be OK if the result is never an error, but writing to a file can always fail. Let's write either "Done" or our own error message depending on the result:
 ```rust
     match buffer.save("image.png") {
@@ -196,3 +201,5 @@ Unwrapping should be OK if the result is never an error, but writing to a file c
         Ok(()) => println!("Done."),
     };
 ```
+
+And now we are finally done. In the next session we'll create some vectors.
