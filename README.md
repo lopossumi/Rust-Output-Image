@@ -1,5 +1,7 @@
 # Learning Rust Part 2: Output an Image
 
+> 📚 Series: [Part 1](https://github.com/lopossumi/Rust-Hello) - [Part 2](https://github.com/lopossumi/Rust-Output-Image) - [Part 3](https://github.com/lopossumi/Rust-Vectors)
+
 In this session our goal is to write an image file with some colored pixels. It seems that we need to be able to do at least the following:
 
 * Loop over some pixels in an x-y coordinate system
@@ -52,7 +54,7 @@ PS D:\RustProjects\output-image> cargo run
 4
 ```
 
-💡 Note: If you want to include the last number, the expression should be written as ```for x in 1..=5```.
+> 💡 Note: If you want to include the last number, the expression should be written as ```for x in 1..=5```.
 
 ## PPM Image Format
 
@@ -105,7 +107,7 @@ PS D:\RustProjects\output-image> cargo run > image.ppm
 ```
 ![image.png](image.png)
 
-💡 Note: The default types are ```i32``` for integers and ```f64``` for floats.
+> 💡 Note: The default types are ```i32``` for integers and ```f64``` for floats.
 
 ## Error output
 To track a long running render, let's add progress reporting. Similar to the ```println!``` macro, Rust provides a ```eprintln!``` mactro which directs the output to the error output stream.
@@ -143,7 +145,7 @@ fn main() {
     // in our for loops.
     let mut buffer: image::RgbImage = image::ImageBuffer::new(IMAGE_WIDTH, IMAGE_HEIGHT);
 ```
-💡 Note: Older code examples often mention ```extern crate```, but in Rust 2018 it should no longer be required.
+> 💡 Note: Older code examples often mention ```extern crate```, but in Rust 2018 it should no longer be required.
 
 ### Prettier imports
 
